@@ -44,18 +44,16 @@ function sendPushNotification(req, res) {
 }
 
 function sendAllPushNotification(req, res) {
-  console.log(subscriptions);
-
   for (let id in subscriptions) {
     const pushSubscription = subscriptions[id];
     webpush
       .sendNotification(
         pushSubscription,
         JSON.stringify({
-          title: "New Product Available ",
-          text: "HEY! Take a look at this brand new t-shirt!",
+          title: "Over VTHD Alert",
+          text: "กรุณาตรวจสอบข้อมูล TLMID = 101",
           image: "/images/jason-leung-HM6TMmevbZQ-unsplash.jpg",
-          tag: "new-product",
+          tag: "tlm-vthd",
           url: "/new-product-jason-leung-HM6TMmevbZQ-unsplash.html"
         })
       )
