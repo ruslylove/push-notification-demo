@@ -43,4 +43,29 @@ function sendPushNotification(req, res) {
   res.status(202).json({});
 }
 
-module.exports = { handlePushNotificationSubscription, sendPushNotification };
+function sendAllPushNotification(req, res) {
+  console.log(subscriptions);
+
+  for (let id in subscriptions) {
+    const pushSubscription = subscriptions[id];
+    webpush
+      .sendNotification(
+        pushSubscription,
+        JSON.stringify({
+          title: "New Product Available ",
+          text: "HEY! Take a look at this brand new t-shirt!",
+          image: "/images/jason-leung-HM6TMmevbZQ-unsplash.jpg",
+          tag: "new-product",
+          url: "/new-product-jason-leung-HM6TMmevbZQ-unsplash.html"
+        })
+      )
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  res.status(202).json({});
+}
+
+
+module.exports = { handlePushNotificationSubscription, sendPushNotification, sendAllPushNotification };

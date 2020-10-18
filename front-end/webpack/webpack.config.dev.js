@@ -12,12 +12,12 @@ module.exports = merge(common, {
   },
   devServer: {
     inline: true,
-    port:9000
+    port: 9000
   },
   plugins: [
     new Webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development'),
-      'process.env.PUSH_SERVER_URL': JSON.stringify('http://localhost:8080'),
+      'process.env.PUSH_SERVER_URL': JSON.stringify('https://notification.teratam.com'),
     })
   ],
   module: {
