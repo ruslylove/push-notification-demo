@@ -29,11 +29,11 @@ function sendPushNotification(req, res) {
     .sendNotification(
       pushSubscription,
       JSON.stringify({
-        title: "New Product Available ",
-        text: "HEY! Take a look at this brand new t-shirt!",
-        image: "/images/jason-leung-HM6TMmevbZQ-unsplash.jpg",
+        title: "Test TLM Alert!",
+        text: "TLM 101, Over VTHD!",
+        image: "/android-chrome-192x192.png",
         tag: "new-product",
-        url: "/new-product-jason-leung-HM6TMmevbZQ-unsplash.html"
+        url: "https://csb-14wi2-ivh5lchgc.vercel.app/"
       })
     )
     .catch(err => {
@@ -46,17 +46,27 @@ function sendPushNotification(req, res) {
 function sendAllPushNotification(req, res) {
   const message = req.body;
 
+  let text = "TLM_ID: " + message.tlm_id;
+  // over vthd
+  if (message.ph1_vthd) {
+    text += ", VTHD: " + Math.max(message.ph1_vthd, message.ph2_vthd, message.ph3_vthd).toFixed(2);
+  }
+  // over ithd
+  if (message.ph1_ithd) {
+    text += ", ITHD: " + Math.max(message.ph1_ithd, message.ph2_ithd, message.ph3_ithd).toFixed(2);
+  }
+
   for (let id in subscriptions) {
     const pushSubscription = subscriptions[id];
     webpush
       .sendNotification(
         pushSubscription,
         JSON.stringify({
-          title: "Over VTHD Alert!",
-          text: "TLMID=" + message.tlm_id,
+          title: "TLM: " + new Date(message.time * 1000),
+          text: text,
           image: "/android-chrome-192x192.png",
-          tag: "tlm-vthd",
-          url: "/#/detail/SD" + message.tlm_id
+          tag: "tlm-thd",
+          url: "https://csb-14wi2-ivh5lchgc.vercel.app/"
         })
       )
       .catch(err => {
