@@ -62,7 +62,7 @@ function sendAllPushNotification(req, res) {
       .sendNotification(
         pushSubscription,
         JSON.stringify({
-          title: "TLM: " + new Date(message.time * 1000),
+          title: "TLM: " + new Date(message.time * 1000 - 7 * 60 * 60 * 1000),
           text: text,
           image: "/android-chrome-192x192.png",
           tag: "tlm-thd",
