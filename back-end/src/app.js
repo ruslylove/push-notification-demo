@@ -27,6 +27,6 @@ app.use(bodyParser.json());
 
 app.post("/subscription", subscriptionHandler.handlePushNotificationSubscription);
 app.get("/subscription/:id", subscriptionHandler.sendPushNotification);
-app.get("/subscriptionall", subscriptionHandler.sendAllPushNotification);
+app.post("/subscriptionall", subscriptionHandler.sendAllPushNotification);
 
 module.exports = app;
